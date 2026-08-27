@@ -29,14 +29,8 @@ completed(sluggy, cs101m).
 completed(belle, math101).
 
 % Rule: a student is eligible for a course if they've completed all its prereqs(we use forall to check)
-eligible(Student, Course) :-
-    student(Student),
-    course(Course),
-    forall(prereq(Course, Prereq), completed(Student, Prereq)).
+eligible(Student, Course) :- student(Student), course(Course), forall(prereq(Course, Prereq), completed(Student, Prereq)).
 
 % Rule: a course is a direct prereq of another
-indirect_prereq(Course, Prereq) :-
-    prereq(Course, Prereq).
-indirect_prereq(Course, Prereq) :-
-    prereq(Course, Mid),
-    indirect_prereq(Mid, Prereq).
+indirect_prereq(Course, Prereq) :- prereq(Course, Prereq).
+indirect_prereq(Course, Prereq) :- prereq(Course, Mid), indirect_prereq(Mid, Prereq).
